@@ -1,22 +1,22 @@
 DROP TABLE IF EXISTS dim_date;
 
 
--- Create the dim_date table
+
 CREATE TABLE dim_date (
     date_surr_id   INT PRIMARY KEY,      -- YYYYMMDD
     date_dt        DATE NOT NULL,        -- actual date
     day_of_month   INT NOT NULL,         -- day number (1-31)
-    month_name     TEXT NOT NULL,        -- e.g. 'January'
+    month_name     TEXT NOT NULL,        -- 'January' ...
     month_no       INT NOT NULL,         -- month number (1-12)
     year_no        INT NOT NULL,         -- year (e.g. 2024)
-    weekday_name   TEXT NOT NULL,        -- e.g. 'Monday'
+    weekday_name   TEXT NOT NULL,        -- 'Monday' ...
     weekday_no     INT NOT NULL,         -- ISO weekday (1=Mon .. 7=Sun)
     is_weekend     BOOLEAN NOT NULL,     -- TRUE if Saturday or Sunday
     insert_dt      TIMESTAMP NOT NULL DEFAULT NOW(),
     update_dt      TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
--- Fill table with dates from 2020-01-01 to 2030-12-31
+-- dates from 2020-01-01 to 2030-12-31
 INSERT INTO dim_date (
     date_surr_id, date_dt, day_of_month, month_name, month_no, year_no,
     weekday_name, weekday_no, is_weekend
@@ -40,3 +40,4 @@ FROM generate_series(
 ) AS gs(d);
 
 SELECT * FROM dim_date
+
